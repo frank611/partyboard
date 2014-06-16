@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('pboardApp', [
-  "ngCookies","ngResource","ngSanitize","ngRoute"
+  "ngCookies","ngResource","ngSanitize","ngRoute", 'angularFileUpload'
 ])
 .config(function ($routeProvider, $locationProvider, $httpProvider) {
   $routeProvider
@@ -29,6 +29,11 @@ angular.module('pboardApp', [
     });
 
   $locationProvider.html5Mode(true);
+
+  // CORS
+  $httpProvider.defaults.useXDomain = true;
+  delete $httpProvider.defaults.headers.common['X-Requested-With'];
+
 
   // Intercept 401s and redirect you to login
   $httpProvider.interceptors.push(['$q', '$location', function($q, $location) {

@@ -17,6 +17,9 @@ angular.module('pboardApp')
       },
       create: {
         method: 'POST'
+      },
+      addPost: {
+        method: 'PUT'
       }
 	  });
   });
