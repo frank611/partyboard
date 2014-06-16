@@ -15,13 +15,13 @@ angular.module('pboardApp', [
       authenticate: true
     })
     .when('/boards/:id', {
-      templateUrl: 'partials/board',
-      controller: 'BoardCtrl',
+      templateUrl: 'partials/board-viewing',
+      controller: 'BoardViewingCtrl',
       authenticate: true
     })
-    .when('/settings', {
-      templateUrl: 'partials/settings',
-      controller: 'SettingsCtrl',
+    .when('/boards/:id/post', {
+      templateUrl: 'partials/post',
+      controller: 'PostCtrl',
       authenticate: true
     })
     .otherwise({
