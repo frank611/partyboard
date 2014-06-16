@@ -9,13 +9,15 @@ angular.module('pboardApp', [
       templateUrl: 'partials/main',
       controller: 'MainCtrl'
     })
-    .when('/login', {
-      templateUrl: 'partials/login',
-      controller: 'LoginCtrl'
+    .when('/boards', {
+      templateUrl: 'partials/boards',
+      controller: 'BoardsCtrl',
+      authenticate: true
     })
-    .when('/signup', {
-      templateUrl: 'partials/signup',
-      controller: 'SignupCtrl'
+    .when('/boards/:id', {
+      templateUrl: 'partials/board',
+      controller: 'BoardCtrl',
+      authenticate: true
     })
     .when('/settings', {
       templateUrl: 'partials/settings',
@@ -45,11 +47,11 @@ angular.module('pboardApp', [
 })
 .run(function ($rootScope, $location, Auth) {
 
-  // Redirect to login if route requires auth and you're not logged in
   $rootScope.$on('$routeChangeStart', function (event, next) {
-
+    // Redirect to login if route requires auth and you're not logged in
     if (next.authenticate && !Auth.isLoggedIn()) {
-      $location.path('/login');
+      console.log("auth deny");
+      $location.path('/');
     }
   });
 });

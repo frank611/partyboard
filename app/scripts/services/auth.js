@@ -69,6 +69,27 @@ angular.module('pboardApp')
       },
 
       /**
+       * Change password
+       * 
+       * @param  {String}   oldPassword 
+       * @param  {String}   newPassword 
+       * @param  {Function} callback    - optional
+       * @return {Promise}              
+       */
+      changePassword: function(oldPassword, newPassword, callback) {
+        var cb = callback || angular.noop;
+
+        return User.update({
+          oldPassword: oldPassword,
+          newPassword: newPassword
+        }, function(user) {
+          return cb(user);
+        }, function(err) {
+          return cb(err);
+        }).$promise;
+      },
+
+      /**
        * Gets all available info on authenticated user
        * 
        * @return {Object} user
