@@ -1,4 +1,4 @@
 <div class="post" ng-repeat="post in board.posts">
-	<img src="{{ post.imageUrl }}" alt="{{ post.quote }}">
+	<img ng-src="/api/posts/{{ post._id }}/image" alt="{{ post.quote }}">
 	<p>{{ post.quote }}</p>
 </div>
