@@ -1,4 +1,9 @@
-<div class="post" ng-repeat="post in board.posts">
-	<img ng-src="/api/posts/{{ post._id }}/image" alt="{{ post.quote }}">
-	<p>{{ post.quote }}</p>
+<div ng-switch="isLoading">
+	<div ng-switch-when="true">
+		Loading...
+	</div>
+	<div ng-switch-when="false">
+		<img ng-src="{{ currentPost._id | publicImageUrl }}" alt="{{ currentPost.quote }}">
+		<p>{{ currentPost.quote }}</p>
+	</div>
 </div>
