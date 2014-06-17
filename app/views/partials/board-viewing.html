@@ -1,9 +1,11 @@
-<div ng-switch="isLoading">
-	<div ng-switch-when="true">
-		Loading...
-	</div>
-	<div ng-switch-when="false">
-		<img ng-src="{{ currentPost._id | publicImageUrl }}" alt="{{ currentPost.quote }}">
-		<p>{{ currentPost.quote }}</p>
+<div class="row">
+	<div ng-switch="isLoading">
+		<div ng-switch-when="true">
+			Loading...
+		</div>
+		<div ng-switch-when="false" id="slideshow">
+			<img ng-src="{{ currentPost._id | publicImageUrl }}" alt="{{ currentPost.quote }}" resize-image>
+			<p>{{ currentPost.quote }}</p>
+		</div>
 	</div>
 </div>

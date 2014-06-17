@@ -3,7 +3,7 @@
 angular.module('pboardApp', [
   "ngCookies","ngResource","ngSanitize","ngRoute", 'angularFileUpload'
 ])
-.config(function ($routeProvider, $locationProvider, $httpProvider) {
+.config(function ($routeProvider, $locationProvider, $httpProvider, $logProvider) {
   $routeProvider
     .when('/', {
       templateUrl: 'partials/main',
@@ -34,7 +34,6 @@ angular.module('pboardApp', [
   $httpProvider.defaults.useXDomain = true;
   delete $httpProvider.defaults.headers.common['X-Requested-With'];
 
-
   // Intercept 401s and redirect you to login
   $httpProvider.interceptors.push(['$q', '$location', function($q, $location) {
     return {
@@ -49,6 +48,8 @@ angular.module('pboardApp', [
       }
     };
   }]);
+
+  $logProvider.debugEnabled(true);
 })
 .run(function ($rootScope, $location, Auth) {
 
