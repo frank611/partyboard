@@ -5,13 +5,12 @@ angular.module('pboardApp')
 
     var getUploadUrl = function(file, cb) {
       $http.get('/api/s3Policy?mimeType=' + file.type).success(function(s3Params) {
-        console.log(s3Params);
         cb(s3Params);
       });
     }
 
     return {
-      uploadImage: function(file) {
+      uploadImage: function(file, cb) {
         getUploadUrl(file, function(s3Params) {
           $upload.upload({
             url: 'https://partyboard.s3.amazonaws.com/',
@@ -27,7 +26,9 @@ angular.module('pboardApp')
             },
             file: file
           }).then(function(response) {
-            console.log(response);
+            var s3Object = X2J.parseXml(response.data);
+            var s3Url = s3Object[0].PostResponse[0].Location[0].jValue;
+            cb(s3Url);
           });
         });
       }

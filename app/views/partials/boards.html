@@ -1,1 +1,3 @@
-<a data-ng-repeat="board in boards" ng-href="/boards/{{ board._id }}">{{ board.name }}</a>
+<div data-ng-repeat="board in boards">
+	<a ng-href="/boards/{{ board._id }}">{{ board.name }}</a>
+</div>
