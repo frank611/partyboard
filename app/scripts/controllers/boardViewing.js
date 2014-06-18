@@ -3,9 +3,13 @@
 angular.module('pboardApp')
   .controller('BoardViewingCtrl', function ($scope, $routeParams, $interval, Board, $rootScope, socket) {
 
-	  socket.on('post', function(data) {
-	  	console.log(data);
+	  socket.on('connect', function() {
+	  	socket.emit('joinBoard', $routeParams.id);
 	  });
+
+	  socket.on('newPost', function(post) {
+  		$scope.board.posts.push(post);
+  	});
 
   	$scope.isLoading = true;
 
@@ -25,6 +29,6 @@ angular.module('pboardApp')
 	  		}
 
 	  		$scope.currentPost = $scope.board.posts[slideshowIndex];
-	  	}, 5000);
+	  	}, 8000);
   	});
   });

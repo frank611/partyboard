@@ -3,7 +3,9 @@
 var express = require('express'),
     path = require('path'),
     fs = require('fs'),
-    mongoose = require('mongoose');
+    mongoose = require('mongoose'),
+    session = require('express-session'),
+    mongoStore = require('connect-mongo')(session);
 
 // Set default node environment to development
 process.env.NODE_ENV = process.env.NODE_ENV || 'development';
@@ -19,17 +21,23 @@ fs.readdirSync(modelsPath).forEach(function (file) {
   }
 });
 
+// Setup mongoStore for passport
+var sessionStore = new mongoStore({
+  url: config.mongo.uri,
+  collection: 'sessions'
+});
+
 // Passport Configuration
 var passport = require('./lib/config/passport');
 
 // Setup Express
 var app = express();
-require('./lib/config/express')(app);
+require('./lib/config/express')(app, sessionStore);
 
 // Setup socket.io
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
-var socketController = require('./lib/sockets')(io);
+var socketController = require('./lib/sockets')(io, sessionStore);
 
 // Load express routes
 require('./lib/routes')(app, socketController);
