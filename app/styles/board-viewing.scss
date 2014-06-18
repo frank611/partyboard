@@ -5,6 +5,7 @@
 
 	img {
 		position: absolute;
+
 		&.landscape {
 			width: 100%;
 			height: auto;
@@ -13,6 +14,43 @@
 		&.portrait {
 			height: 100%;
 			width: auto;
+		}
+	}
+
+	#quote {
+		position: absolute;
+		bottom: 0;
+		background: rgba(0,0,0,0.7);
+		width: 100%;
+		color: white;
+		padding: 20px;
+		line-height: 75px;
+
+		p {
+			font-size: 30px;
+		}
+
+		#author {
+			height: 75px;
+			overflow: auto;
+			position: relative;
+
+			#profile-picture {
+				position: absolute;
+				right: 0;
+				display: block;
+				float: right;
+				width: 75px;
+				height: 75px;
+				background-size: cover;
+				background-position: center center;
+			}
+
+			span {
+				font-size: 20px;
+				position: absolute;
+				right: 90px;
+			}
 		}
 	}
 }

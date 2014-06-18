@@ -5,7 +5,15 @@
 		</div>
 		<div ng-switch-when="false" id="slideshow">
 			<img ng-src="{{ currentPost._id | publicImageUrl }}" alt="{{ currentPost.quote }}" resize-image>
-			<p>{{ currentPost.quote }}</p>
+			<div id="quote">
+				<div class="col-xs-9">
+					<p>{{ currentPost.quote }}</p>
+				</div>
+				<div class="col-xs-3" id="author">
+					<div id="profile-picture" style="background-image: url({{ currentPost.creator._id | profilePicUrl }});"></div>
+					<span>Francis Marineau</span>
+				</div>
+			</div>
 		</div>
 	</div>
 </div>

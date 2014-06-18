@@ -8,7 +8,7 @@ angular.module('pboardApp')
       get: {
         method: 'GET',
         params: {
-          id:'me'
+          id: 'me'
         }
       }
 	  });
