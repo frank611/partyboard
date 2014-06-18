@@ -4,13 +4,13 @@
 			Loading...
 		</div>
 		<div ng-switch-when="false" id="slideshow">
-			<div id="picture" bg-img="{{ currentPost._id | publicImageUrl }}" resize-image>
+			<div id="picture" bg-img="{{ currentPost | publicImageUrl }}">
 			<div id="quote">
 				<div class="col-xs-9">
 					<p>{{ currentPost.quote }}</p>
 				</div>
 				<div class="col-xs-3" id="author">
-					<div id="profile-picture" bg-img="{{ currentPost.creator._id | profilePicUrl }}"></div>
+					<div id="profile-picture" bg-img="{{ currentPost.creator | profilePicUrl }}"></div>
 					<span>Francis Marineau</span>
 				</div>
 			</div>

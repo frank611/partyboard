@@ -3,13 +3,13 @@
 angular.module('pboardApp')
 
 	.filter('publicImageUrl', function() {
-	  return function(postId) {
-	    return '/api/posts/' + postId + '/image';
+	  return function(post) {
+	    return '/api/posts/' + post._id + '/image';
 	  };
 	})
 
 	.filter('profilePicUrl', function() {
-	  return function(userId) {
-	    return '/api/users/' + userId + '/picture';
+	  return function(user) {
+	    return '/api/users/' + user._id + '/picture';
 	  };
 	});
