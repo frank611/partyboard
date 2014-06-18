@@ -6,12 +6,12 @@
 		<div ng-switch-when="false" id="slideshow">
 			<div id="picture" bg-img="{{ currentPost | publicImageUrl }}">
 			<div id="quote">
-				<div class="col-xs-9">
+				<div class="col-xs-8">
 					<p>{{ currentPost.quote }}</p>
 				</div>
-				<div class="col-xs-3" id="author">
+				<div class="col-xs-4" id="author">
 					<div id="profile-picture" bg-img="{{ currentPost.creator | profilePicUrl }}"></div>
-					<span>Francis Marineau</span>
+					<span>{{ currentPost.creator.name | limitTo: 35 }}</span>
 				</div>
 			</div>
 		</div>

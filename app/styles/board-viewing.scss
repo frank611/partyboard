@@ -1,7 +1,9 @@
 #slideshow {
 	width: 100%;
 	height: 100%;
-	overflow: hidden;
+	position: absolute;
+  overflow: hidden;
+  background: -webkit-radial-gradient(50% 50%,ellipse closest-corner,rgba(0,0,0,0.3) 1%,rgba(0,0,0,0.625) 100%);
 
 	#picture {
 		width: 100%;
@@ -10,8 +12,8 @@
 		background-size: contain;
 		background-repeat: no-repeat;
 		background-position: center center;
-		position:absolute;
-    overflow:hidden;
+		position: absolute;
+  	overflow: hidden;
 	}
 
 	#quote {
@@ -30,6 +32,7 @@
 			height: 75px;
 			overflow: auto;
 			position: relative;
+			overflow: hidden;
 
 			#profile-picture {
 				position: absolute;

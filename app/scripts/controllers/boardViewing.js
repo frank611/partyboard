@@ -1,7 +1,11 @@
 'use strict';
 
 angular.module('pboardApp')
-  .controller('BoardViewingCtrl', function ($scope, $routeParams, $interval, Board, $rootScope) {
+  .controller('BoardViewingCtrl', function ($scope, $routeParams, $interval, Board, $rootScope, socket) {
+
+	  socket.on('post', function(data) {
+	  	console.log(data);
+	  });
 
   	$scope.isLoading = true;
 

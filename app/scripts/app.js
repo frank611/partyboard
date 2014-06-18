@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('pboardApp', [
-  "ngCookies","ngResource","ngSanitize","ngRoute", 'angularFileUpload'
+  "ngCookies","ngResource","ngSanitize","ngRoute", 'angularFileUpload', 'btford.socket-io'
 ])
 .config(function ($routeProvider, $locationProvider, $httpProvider, $logProvider) {
   $routeProvider
@@ -60,4 +60,7 @@ angular.module('pboardApp', [
       $location.path('/');
     }
   });
+})
+.factory('socket', function (socketFactory) {
+  return socketFactory();
 });

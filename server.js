@@ -25,10 +25,17 @@ var passport = require('./lib/config/passport');
 // Setup Express
 var app = express();
 require('./lib/config/express')(app);
-require('./lib/routes')(app);
+
+// Setup socket.io
+var http = require('http').Server(app);
+var io = require('socket.io')(http);
+var socketController = require('./lib/sockets')(io);
+
+// Load express routes
+require('./lib/routes')(app, socketController);
 
 // Start server
-app.listen(config.port, config.ip, function () {
+http.listen(config.port, config.ip, function () {
   console.log('Express server listening on %s:%d, in %s mode', config.ip, config.port, app.get('env'));
 });
 
