@@ -3,13 +3,19 @@
 angular.module('pboardApp')
   .controller('BoardViewingCtrl', function ($scope, $routeParams, $interval, Board, $rootScope, socket) {
 
+  	$scope.newPosts = [];
+
 	  socket.on('connect', function() {
 	  	socket.emit('joinBoard', $routeParams.id);
 	  });
 
 	  socket.on('newPost', function(post) {
-  		$scope.board.posts.push(post);
+  		$scope.addNewPostToQueue(post);
   	});
+
+  	$scope.addNewPostToQueue = function(post) {
+  		$scope.newPosts.push(post);
+  	}
 
   	$scope.isLoading = true;
 
