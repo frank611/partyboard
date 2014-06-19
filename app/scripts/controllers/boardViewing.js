@@ -4,37 +4,51 @@ angular.module('pboardApp')
   .controller('BoardViewingCtrl', function ($scope, $routeParams, $interval, Board, $rootScope, socket) {
 
   	$scope.newPosts = [];
+  	$scope.slideshowIndex = 0;
+  	$scope.isLoading = true;
+  	$scope.board = Board.get({ id: $routeParams.id }, function() {$scope.resumeNormalSlideshow()});
 
 	  socket.on('connect', function() {
 	  	socket.emit('joinBoard', $routeParams.id);
 	  });
 
 	  socket.on('newPost', function(post) {
+	  	console.log('newPost');
   		$scope.addNewPostToQueue(post);
   	});
 
   	$scope.addNewPostToQueue = function(post) {
   		$scope.newPosts.push(post);
-  	}
+  		$interval.cancel($scope.slideshowInterval);
 
-  	$scope.isLoading = true;
+			function showNewPost() {
+  			if ($scope.newPosts.length > 0) {
+  				$scope.currentPost = $scope.newPosts.shift();
+  				$scope.board.posts.push($scope.currentPost);
+  			}
+  			else {
+  				$interval.cancel($scope.newQueueInterval);
+  				$scope.resumeNormalSlideshow();
+  			}
+  		}
 
-  	$scope.board = Board.get({
-  		id: $routeParams.id
-  	}, function() {
-  		var slideshowIndex = 0;
-	  	$scope.currentPost = $scope.board.posts[slideshowIndex];
-	  	$scope.isLoading = false;
+  		$scope.newQueueInterval = $interval(showNewPost, 8000);
+  		showNewPost();
+  	};
 
-	  	var slideshowInterval = $interval(function() {
-	  		if (slideshowIndex < $scope.board.posts.length - 1) {
-	  			slideshowIndex++;
+  	$scope.resumeNormalSlideshow = function() {
+  		$scope.currentPost = $scope.board.posts[$scope.slideshowIndex];
+  		$scope.isLoading = false;
+
+  		$scope.slideshowInterval = $interval(function() {
+  			$scope.currentPost = $scope.board.posts[$scope.slideshowIndex];
+
+	  		if ($scope.slideshowIndex < $scope.board.posts.length - 1) {
+	  			$scope.slideshowIndex++;
 	  		}
 	  		else {
-	  			slideshowIndex = 0;
+	  			$scope.slideshowIndex = 0;
 	  		}
-
-	  		$scope.currentPost = $scope.board.posts[slideshowIndex];
 	  	}, 8000);
-  	});
+  	};
   });
