@@ -1,12 +1,23 @@
 'use strict';
 
 angular.module('pboardApp')
-  .controller('BoardViewingCtrl', function ($scope, $routeParams, $interval, Board, $rootScope, socket) {
+  .controller('BoardViewingCtrl', function ($scope, $routeParams, $interval, Board, $rootScope, socket, preloader, $filter) {
+
+  	// Settings
+  	$scope.slideshowSpeed = 3000;
 
   	$scope.newPosts = [];
   	$scope.slideshowIndex = 0;
   	$scope.isLoading = true;
-  	$scope.board = Board.get({ id: $routeParams.id }, function() {$scope.resumeNormalSlideshow()});
+  	$scope.board = Board.get({ id: $routeParams.id }, function() {
+  		// Preload images then start slideshow
+  		$scope.imageLocations = $scope.board.posts.map(function(post) {
+  			return $filter('publicImageUrl')(post);
+  		});
+
+      preloader.preloadImages($scope.imageLocations);
+      $scope.resumeNormalSlideshow();
+  	});
 
 	  socket.on('connect', function() {
 	  	socket.emit('joinBoard', $routeParams.id);
@@ -18,22 +29,24 @@ angular.module('pboardApp')
   	});
 
   	$scope.addNewPostToQueue = function(post) {
-  		$scope.newPosts.push(post);
-  		$interval.cancel($scope.slideshowInterval);
+  		preloader.preloadImages(['http://localhost:9000' + $filter('publicImageUrl')(post)]).then(function() {
+  			$scope.newPosts.push(post);
+	  		$interval.cancel($scope.slideshowInterval);
 
-			function showNewPost() {
-  			if ($scope.newPosts.length > 0) {
-  				$scope.currentPost = $scope.newPosts.shift();
-  				$scope.board.posts.push($scope.currentPost);
-  			}
-  			else {
-  				$interval.cancel($scope.newQueueInterval);
-  				$scope.resumeNormalSlideshow();
-  			}
-  		}
+				function showNewPost() {
+	  			if ($scope.newPosts.length > 0) {
+	  				$scope.currentPost = $scope.newPosts.shift();
+	  				$scope.board.posts.push($scope.currentPost);
+	  			}
+	  			else {
+	  				$interval.cancel($scope.newQueueInterval);
+	  				$scope.resumeNormalSlideshow();
+	  			}
+	  		}
 
-  		$scope.newQueueInterval = $interval(showNewPost, 8000);
-  		showNewPost();
+	  		$scope.newQueueInterval = $interval(showNewPost, $scope.slideshowSpeed);
+	  		showNewPost();
+  		});
   	};
 
   	$scope.resumeNormalSlideshow = function() {
@@ -49,6 +62,6 @@ angular.module('pboardApp')
 	  		else {
 	  			$scope.slideshowIndex = 0;
 	  		}
-	  	}, 8000);
+	  	}, $scope.slideshowSpeed);
   	};
   });
