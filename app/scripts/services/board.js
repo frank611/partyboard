@@ -15,6 +15,13 @@ angular.module('pboardApp')
         },
         isArray: true
       },
+      joinable: {
+        method: 'GET',
+        params: {
+          id: 'joinable'
+        },
+        isArray: true
+      },
       create: {
         method: 'POST'
       },

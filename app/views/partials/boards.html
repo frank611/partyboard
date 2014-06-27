@@ -1,25 +1,54 @@
-<div class="list-group">
-  <a ng-href="/boards/{{ board._id }}" class="list-group-item" data-ng-repeat="board in boards">
-    <h4 class="list-group-item-heading">{{ board.name }}</h4>
-    <p class="list-group-item-text">...</p>
-  </a>
-</div>
+<div ng-include="'partials/navbar.html'"></div>
 
-<div class="row">
-	<div class="col-xs-6">
-		<div class="panel panel-default">
-		  <div class="panel-heading">
-		    <h3 class="panel-title">Create a new board</h3>
-		  </div>
-		  <div class="panel-body">
-		    <form class="form-inline" role="form" ng-submit="createBoard()">
-				  <div class="form-group">
-				    <label class="sr-only" for="exampleInputEmail2">Board name</label>
-				    <input type="text" class="form-control" placeholder="Board name" ng-model="newBoardName">
-				  </div>
-				  <button type="submit" class="btn btn-default">Create</button>
-				</form>
-		  </div>
+<div class="container-full">
+	<div class="row">
+		<div class="col-xs-6">
+			<div class="panel panel-default">
+			  <!-- Default panel contents -->
+			  <div class="panel-heading">My Boards</div>
+			  <!-- List group -->
+			  <div class="list-group">
+				  <a ng-href="/boards/{{ board._id }}" class="list-group-item" data-ng-repeat="board in boards">
+				    <h4 class="list-group-item-heading">{{ board.name }}</h4>
+				    <p class="list-group-item-text">...</p>
+				  </a>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-xs-6">
+			<div class="panel panel-default">
+			  <div class="panel-heading">
+			    <h3 class="panel-title">Create a new board</h3>
+			  </div>
+			  <div class="panel-body">
+			    <form class="form-inline" role="form" ng-submit="createBoard()">
+					  <div class="form-group">
+					    <label class="sr-only" for="exampleInputEmail2">Board name</label>
+					    <input type="text" class="form-control" placeholder="Board name" ng-model="newBoardName">
+					  </div>
+					  <button type="submit" class="btn btn-default">Create</button>
+					</form>
+			  </div>
+			</div>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-xs-6">
+			<div class="panel panel-default">
+			  <!-- Default panel contents -->
+			  <div class="panel-heading">Friend Boards</div>
+			  <!-- List group -->
+			  <div class="list-group">
+				  <a ng-href="/boards/{{ board._id }}/post" class="list-group-item" data-ng-repeat="board in joinableBoards">
+				    <h4 class="list-group-item-heading">{{ board.name }}</h4>
+				    <p class="list-group-item-text">{{ board.creator.name }}</p>
+				  </a>
+				</div>
+			</div>
 		</div>
 	</div>
 </div>

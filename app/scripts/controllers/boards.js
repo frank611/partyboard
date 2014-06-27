@@ -1,14 +1,19 @@
 'use strict';
 
 angular.module('pboardApp')
-  .controller('BoardsCtrl', function ($scope, $http, Board) {
-    $scope.boards = Board.mine();
+  .controller('BoardsCtrl', function ($scope, $http, Board, socket) {
+  $scope.boards = Board.mine();
+  $scope.joinableBoards = Board.joinable();
 
-    $scope.createBoard = function() {
-    	var newBoard = Board.create({
-    		name: $scope.newBoardName
-    	});
+  socket.on('friendStartedShowingBoard', function(board) {
+    console.log(board);
+  })
 
-    	$scope.boards.push(newBoard);
-    };
+  $scope.createBoard = function() {
+    var newBoard = Board.create({
+      name: $scope.newBoardName
+    });
+
+    $scope.boards.push(newBoard);
+  };
   });
