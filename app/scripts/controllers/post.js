@@ -7,11 +7,11 @@ angular.module('pboardApp')
     	var file = document.querySelector('#pictureInput').files[0];
 
       $scope.resizeImage(file, function(resizedFile) {
-        S3.uploadImage(resizedFile, function(s3url) {
+        S3.uploadImage(resizedFile, function(s3Key) {
           Board.addPost({
             id: $routeParams.id
           }, {
-            s3url: s3url,
+            s3Key: s3Key,
             quote: $scope.quote
           });
         });
@@ -62,7 +62,9 @@ angular.module('pboardApp')
 
         var dataurl = canvas.toDataURL("image/jpeg", 0.5);
 
-        cb(dataURItoBlob(dataurl));
+        var resizedFile = dataURItoBlob(dataurl);
+        resizedFile.name = file.name;
+        cb(resizedFile);
       };
     };
 
