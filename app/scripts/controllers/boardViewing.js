@@ -19,9 +19,7 @@ angular.module('pboardApp')
       $scope.resumeNormalSlideshow();
   	});
 
-	  socket.on('connect', function() {
-	  	socket.emit('joinBoard', $routeParams.id);
-	  });
+    socket.emit('joinBoard', $routeParams.id);
 
 	  socket.on('newPost', function(post) {
 	  	console.log('newPost');
@@ -64,4 +62,8 @@ angular.module('pboardApp')
 	  		}
 	  	}, $scope.slideshowSpeed);
   	};
+
+    $scope.$on("$destroy", function(){
+      socket.emit('leaveBoard', $routeParams.id);
+    });
   });

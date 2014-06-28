@@ -10,7 +10,7 @@
 			  <div class="list-group">
 				  <a ng-href="/boards/{{ board._id }}" class="list-group-item" data-ng-repeat="board in boards">
 				    <h4 class="list-group-item-heading">{{ board.name }}</h4>
-				    <p class="list-group-item-text">...</p>
+				    <p class="list-group-item-text">{{ board.posts.length }} posts</p>
 				  </a>
 				</div>
 			</div>
