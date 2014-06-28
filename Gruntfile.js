@@ -424,20 +424,6 @@ module.exports = function (grunt) {
     // },
 
     // Test settings
-    karma: {
-      unit: {
-        configFile: 'karma.conf.js',
-        singleRun: true
-      }
-    },
-
-    mochaTest: {
-      options: {
-        reporter: 'spec'
-      },
-      src: ['test/server/**/*.js']
-    },
-
     env: {
       test: {
         NODE_ENV: 'test'
