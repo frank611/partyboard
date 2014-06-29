@@ -1,12 +1,12 @@
 # config/deploy.rb
 
 # probably a lot of ways to improve this...
-set :application, 'my_app'
+set :application, 'partyboard'
 set :repo_url, 'git@github.com:frank611/partyboard.git'
 # should set up a deploy user
 set :user, 'deploy'
 
-set :deploy_to, '/var/www/my_app'
+set :deploy_to, '/var/www/partyboard'
 set :scm, :git
 
 set :format, :pretty

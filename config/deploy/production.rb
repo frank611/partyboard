@@ -1,7 +1,7 @@
 # config/deploy/production.rb
 set :stage, :production
 
-server 'frankthedev.com', user: 'deploy', roles: %w{web app}, my_property: :my_value
+server 'frankthedev.com', user: 'deploy', roles: %w{web app}
 
 server 'frankthedev.com',
   user: 'deploy',
