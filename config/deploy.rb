@@ -3,6 +3,7 @@
 # probably a lot of ways to improve this...
 set :application, 'partyboard'
 set :repo_url, 'git@github.com:frank611/partyboard.git'
+set :branch, 'prod'
 # should set up a deploy user
 set :user, 'deploy'
 
