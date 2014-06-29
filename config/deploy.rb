@@ -2,7 +2,7 @@
 
 # probably a lot of ways to improve this...
 set :application, 'my_app'
-set :repo_url, 'git@github.com:USERNAME/my_app.git'
+set :repo_url, 'git@github.com:frank611/partyboard.git'
 # should set up a deploy user
 set :user, 'deploy'
 
