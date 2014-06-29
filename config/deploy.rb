@@ -38,7 +38,7 @@ namespace :deploy do
     on roles(:app), in: :sequence, wait: 5 do
       # This assumes you are using upstart to startup your application
       # - be sure that your upstart script runs as the 'deploy' user
-      execute "sudo start node-upstart-script", raise_on_non_zero_exit: false
+      execute "sudo start partyboard", raise_on_non_zero_exit: false
     end
   end
 
