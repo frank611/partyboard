@@ -1,0 +1,80 @@
+<div ng-include="'partials/navbar.html'"></div>
+
+<div class="container-full">
+
+	<div class="row" ng-show="joinableBoards.length">
+		<div class="col-xs-6">
+			<div class="panel panel-default">
+			  <!-- Default panel contents -->
+			  <div class="panel-heading">Friend Boards</div>
+			  <!-- List group -->
+			  <div class="list-group">
+				  <a ng-href="/boards/{{ board._id }}/post" class="list-group-item" data-ng-repeat="board in joinableBoards">
+				    <h4 class="list-group-item-heading">
+				    	{{ board.name }}
+				    	<small>
+								<ng-pluralize count="board.posts.length" when="{'0': 'No post added yet.',
+                       'one': '1 post',
+                       'other': '{} posts'}">
+  							</ng-pluralize>
+  							<ng-pluralize count="board.nbContribs" when="{'0': '',
+                       'one': ' from the creator',
+                       'other': ' from {} contributors'}">
+  							</ng-pluralize>
+							</small>
+				    </h4>
+				    <p class="list-group-item-text">{{ board.creator.name }}</p>
+				  </a>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-xs-6">
+			<div class="panel panel-default">
+			  <!-- Default panel contents -->
+			  <div class="panel-heading">My Boards</div>
+			  <!-- List group -->
+			  <div class="list-group">
+				  <div ng-click="goToBoard(board)" class="list-group-item" data-ng-repeat="board in boards" style="cursor: pointer">
+				    <h4 class="list-group-item-heading">
+				    	{{ board.name }}
+							<small>
+								<ng-pluralize count="board.posts.length" when="{'0': 'No post added yet.',
+                       'one': '1 post',
+                       'other': '{} posts'}">
+  							</ng-pluralize>
+  							<ng-pluralize count="board.nbContribs" when="{'0': '',
+                       'one': ' from you and you only',
+                       'other': ' from {} contributors'}">
+  							</ng-pluralize>
+							</small>
+			    	</h4>
+				    <p class="list-group-item-text"><a ng-href="/boards/{{ board._id }}">Slideshow</a> | <a ng-href="/boards/{{ board._id }}/post">Add photos</a></p>
+				  </div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-xs-6">
+			<div class="panel panel-default">
+			  <div class="panel-heading">
+			    <h3 class="panel-title">Create a new board</h3>
+			  </div>
+			  <div class="panel-body">
+			    <form class="form-inline" role="form" ng-submit="createBoard()">
+					  <div class="form-group">
+					    <label class="sr-only" for="exampleInputEmail2">Board name</label>
+					    <input type="text" class="form-control" placeholder="Board name" ng-model="newBoardName">
+					  </div>
+					  <button type="submit" class="btn btn-default">Create</button>
+					</form>
+			  </div>
+			</div>
+		</div>
+	</div>
+
+</div>

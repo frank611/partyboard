@@ -1,0 +1,21 @@
+<div class="container-full">
+	<div class="row">
+		<div ng-switch="isLoading">
+			<div ng-switch-when="true">
+				Loading...
+			</div>
+			<div ng-switch-when="false" id="slideshow">
+				<div id="picture" bg-img="{{ currentPost | publicImageUrl }}">
+				<div id="quote">
+					<div class="col-xs-8">
+						<p>{{ currentPost.quote }}</p>
+					</div>
+					<div class="col-xs-4" id="author">
+						<div id="profile-picture" bg-img="{{ currentPost.creator | profilePicUrl }}"></div>
+						<span>{{ currentPost.creator.name | limitTo: 35 }}</span>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div></div>
