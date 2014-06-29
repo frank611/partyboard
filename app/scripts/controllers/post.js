@@ -2,9 +2,10 @@
 
 angular.module('pboardApp')
   .controller('PostCtrl', function ($scope, $routeParams, Board, S3) {
+    $scope.tookPhoto = false;
 
     $scope.uploadPost = function() {
-    	var file = document.querySelector('#pictureInput').files[0];
+    	var file = $('#pictureInput')[0].files[0];
 
       $scope.resizeImage(file, function(resizedFile) {
         S3.uploadImage(resizedFile, function(s3Key) {
@@ -17,6 +18,17 @@ angular.module('pboardApp')
         });
       });
     };
+
+    $scope.openCamera = function() {
+      $('#pictureInput').click();
+    }
+
+    // This is called when the user takes a picture (on input:file's change event)
+    $scope.photoTaken = function(dataURI) {
+      $scope.$apply(function() {
+        $scope.localPhotoSrc = dataURI;
+      });
+    }
 
     $scope.resizeImage = function(file, cb) {
       function dataURItoBlob(dataURI) {

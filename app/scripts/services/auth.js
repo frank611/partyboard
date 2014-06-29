@@ -18,16 +18,8 @@ angular.module('pboardApp')
        */
       login: function(user, callback) {
         var cb = callback || angular.noop;
-
-        return Session.save({
-          email: user.email,
-          password: user.password
-        }, function(user) {
-          $rootScope.currentUser = user;
-          return cb();
-        }, function(err) {
-          return cb(err);
-        }).$promise;
+        $location.url('/auth/facebook');
+        cb();
       },
 
       /**

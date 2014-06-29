@@ -1,0 +1,15 @@
+#pictureInput {
+	visibility: hidden;
+	height: 0;
+}
+
+form[name=postForm] {
+	.btn-secondary {
+		margin-bottom: 15px;
+	}
+
+	#preview-image {
+		height: 100px;
+		margin: 0 auto;
+	}
+}
