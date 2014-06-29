@@ -21,7 +21,7 @@ namespace :deploy do
   desc "Stop Forever"
   task :started do
     on roles(:app) do
-      execute "forever stopall"
+      execute "forever stopall", raise_on_non_zero_exit: false
     end
   end
 
