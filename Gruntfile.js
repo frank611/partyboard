@@ -409,6 +409,12 @@ module.exports = function (grunt) {
           remote: 'git@github.com:frank611/partyboard.git',
           branch: 'prod'
         }
+      },
+      dokku: {
+        options: {
+          remote: 'dokku@v7apps.com:partyboard',
+          branch: 'master'
+        }
       }
     },
 
