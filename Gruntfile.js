@@ -413,7 +413,7 @@ module.exports = function (grunt) {
       dokku: {
         options: {
           remote: 'dokku@v7apps.com:partyboard',
-          branch: 'master'
+          branch: 'prod:master'
         }
       }
     },
