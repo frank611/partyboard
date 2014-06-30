@@ -10,7 +10,11 @@
 			  <img id="preview-image" ng-src="{{ localPhotoSrc }}" ng-show="localPhotoSrc">
 			  <input type="text" class="form-control" ng-model="quote" placeholder="Add a quote"><br>
 
-			  <button type="submit" class="btn btn-lg btn-primary" ng-show="localPhotoSrc">Upload</button>
+			  <div ng-show="localPhotoSrc" id="button-row">
+			  	<button type="submit" class="btn btn-lg btn-primary center-block" ng-show="localPhotoSrc">Accept</button>
+				  <span>or</span>
+				  <button type="button" class="btn btn-lg btn-secondary center-block" ng-click="openCamera()" >Retake</button>
+			  </div>
 			</form>
 		</div>
 	</div>

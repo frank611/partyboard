@@ -1,20 +1,22 @@
 'use strict';
 
 angular.module('pboardApp')
-  .controller('PostCtrl', function ($scope, $routeParams, Board, S3) {
+  .controller('PostCtrl', function ($scope, $routeParams, $route, Board, S3) {
     $scope.tookPhoto = false;
 
     $scope.uploadPost = function() {
     	var file = $('#pictureInput')[0].files[0];
 
       $scope.resizeImage(file, function(resizedFile) {
-        S3.uploadImage(resizedFile, function(s3Key) {
+        S3.uploadImage(resizedFile, function imageUploaded(s3Key) {
           Board.addPost({
             id: $routeParams.id
           }, {
             s3Key: s3Key,
             quote: $scope.quote
           });
+
+          $route.reload();
         });
       });
     };
@@ -72,7 +74,7 @@ angular.module('pboardApp')
         var ctx = canvas.getContext("2d");
         ctx.drawImage(img, 0, 0, width, height);
 
-        var dataurl = canvas.toDataURL("image/jpeg", 0.5);
+        var dataurl = canvas.toDataURL("image/jpeg", 0.8);
 
         var resizedFile = dataURItoBlob(dataurl);
         resizedFile.name = file.name;
