@@ -27,7 +27,7 @@ angular.module('pboardApp')
   	});
 
   	$scope.addNewPostToQueue = function(post) {
-  		preloader.preloadImages(['http://localhost:9000' + $filter('publicImageUrl')(post)]).then(function() {
+  		preloader.preloadImages([$filter('publicImageUrl')(post)]).then(function() {
   			$scope.newPosts.push(post);
 	  		$interval.cancel($scope.slideshowInterval);
 
