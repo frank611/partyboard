@@ -5,14 +5,22 @@
 				Loading...
 			</div>
 			<div ng-switch-when="false" id="slideshow">
-				<div id="picture" bg-img="{{ currentPost | publicImageUrl }}">
-				<div id="quote">
-					<div class="col-xs-8">
-						<p>{{ currentPost.quote }}</p>
+				<div ng-switch="board.posts.length" style="height: 100%;">
+					<div ng-switch-default>
+						<div id="picture" bg-img="{{ currentPost | publicImageUrl }}">
+							<div id="quote">
+								<div class="col-xs-8">
+									<p>{{ currentPost.quote }}</p>
+								</div>
+								<div class="col-xs-4" id="author">
+									<div id="profile-picture" bg-img="{{ currentPost.creator | profilePicUrl }}"></div>
+									<span>{{ currentPost.creator.name | limitTo: 35 }}</span>
+								</div>
+							</div>
+						</div>
 					</div>
-					<div class="col-xs-4" id="author">
-						<div id="profile-picture" bg-img="{{ currentPost.creator | profilePicUrl }}"></div>
-						<span>{{ currentPost.creator.name | limitTo: 35 }}</span>
+					<div ng-switch-when="0" style="height: 100%; position: relative; text-align: center;">
+						<p id="empty-board">This board is empty. Post pictures to it to have them displayed here.</p>
 					</div>
 				</div>
 			</div>
