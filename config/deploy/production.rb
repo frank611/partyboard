@@ -1,9 +1,9 @@
 # config/deploy/production.rb
 set :stage, :production
 
-server 'frankthedev.com', user: 'deploy', roles: %w{web app}
+server 'new.frankthedev.com', user: 'deploy', roles: %w{web app}
 
-server 'frankthedev.com',
+server 'new.frankthedev.com',
   user: 'deploy',
   roles: %w{web app},
   ssh_options: {
