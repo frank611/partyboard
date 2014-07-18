@@ -64,7 +64,7 @@ angular.module('pboardApp')
       }, $scope.slideshowSpeed);
     };
 
-    $scope.$on("$destroy", function(){
+    $scope.$on('$destroy', function(){
       socket.emit('leaveBoard', $routeParams.id);
     });
   });

@@ -1,3 +1,5 @@
+'use strict';
+
 angular.module('pboardApp')
 
 .factory('preloader', function( $q, $rootScope ) {
@@ -204,7 +206,7 @@ angular.module('pboardApp')
             preloader = image = event = null;
           });
         })
-        .prop( "src", imageLocation );
+        .prop( 'src', imageLocation );
     }
   };
 

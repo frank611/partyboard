@@ -3,16 +3,17 @@
 angular.module('pboardApp')
   .factory('S3', function ($http, $upload) {
 
-    var getUploadUrl = function(file, cb) {
-      $http.get('/api/s3Policy?mimeType=' + file.type).success(function(s3Params) {
+    var getUploadUrl = function(file, boardId, cb) {
+      $http.get('/api/s3Policy?mimeType=' + file.type + '&boardId=' + boardId).success(function(s3Params) {
         cb(s3Params);
       });
-    }
+    };
 
     return {
-      uploadImage: function(file, cb) {
-        getUploadUrl(file, function(s3Params) {
-          var s3Key = 'boardPics/' + Math.round(Math.random()*1000000) + '$' + file.name.replace(' ', '-');
+      uploadImage: function(file, boardId, cb) {
+        getUploadUrl(file, boardId, function(s3Params) {
+          var s3Key = boardId + '/' + Math.round(Math.random()*1000000) + '$' + file.name.replace(' ', '-');
+          console.log(s3Key);
 
           $upload.upload({
             url: 'https://partyboard.s3.amazonaws.com/',
@@ -27,10 +28,10 @@ angular.module('pboardApp')
               'Signature' : s3Params.s3Signature
             },
             file: file
-          }).then(function(response) {
+          }).then(function() {
             cb(s3Key);
           });
         });
       }
-    }
+    };
   });

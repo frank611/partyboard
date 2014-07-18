@@ -10,6 +10,6 @@ server 'new.frankthedev.com',
 #    user: 'user_name', # overrides user setting above
     keys: %w(~/.ssh/id_rsa),
     forward_agent: true,
-    auth_methods: %w(publickey password),
+    auth_methods: %w(publickey),
     #password: 'use a key instead'
   }

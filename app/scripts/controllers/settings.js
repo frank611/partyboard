@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('pboardApp')
-  .controller('BoardsCtrl', function ($scope, $http, Board, socket, $location) {
+  .controller('SettingsCtrl', function ($scope, $http, Board, socket, $location) {
     $scope.boards = Board.mine();
     $scope.joinableBoards = Board.joinable();
 
@@ -20,13 +20,7 @@ angular.module('pboardApp')
     };
 
     // Allows us to link from ng-click
-    $scope.goToBoard = function(board) {
+    $scope.goToBoard = function (board) {
       $location.path('/boards/' + board._id + '/post');
-    };
-
-    $scope.downloadBoard = function(boardId) {
-      $http.get('/api/boards/' + boardId + '/download', function(res) {
-        console.log(res);
-      });
     };
   });

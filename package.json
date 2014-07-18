@@ -23,6 +23,8 @@
     "passport-local": "~0.1.6",
     "passport.socketio": "^3.2.0",
     "request": "^2.36.0",
+    "rimraf": "^2.2.8",
+    "s3": "^3.1.2",
     "socket.io": "^1.0.5",
     "static-favicon": "~1.0.1"
   },

@@ -5,10 +5,10 @@ angular.module('pboardApp')
     $scope.tookPhoto = false;
 
     $scope.uploadPost = function() {
-    	var file = $('#pictureInput')[0].files[0];
+      var file = $('#pictureInput')[0].files[0];
 
       $scope.resizeImage(file, function(resizedFile) {
-        S3.uploadImage(resizedFile, function imageUploaded(s3Key) {
+        S3.uploadImage(resizedFile, $routeParams.id, function imageUploaded(s3Key) {
           Board.addPost({
             id: $routeParams.id
           }, {
@@ -23,14 +23,14 @@ angular.module('pboardApp')
 
     $scope.openCamera = function() {
       $('#pictureInput').click();
-    }
+    };
 
     // This is called when the user takes a picture (on input:file's change event)
     $scope.photoTaken = function(dataURI) {
       $scope.$apply(function() {
         $scope.localPhotoSrc = dataURI;
       });
-    }
+    };
 
     $scope.resizeImage = function(file, cb) {
       function dataURItoBlob(dataURI) {
@@ -42,15 +42,15 @@ angular.module('pboardApp')
         return new Blob([new Uint8Array(array)], {type: 'image/jpeg'});
       }
 
-      var img = document.createElement("img");
-      var canvas = document.createElement("canvas");
+      var img = document.createElement('img');
+      var canvas = document.createElement('canvas');
       var reader = new FileReader();
       reader.readAsDataURL(file);
 
       reader.onload = function(e) { img.src = e.target.result; };
 
       img.onload = function() {
-        var ctx = canvas.getContext("2d");
+        var ctx = canvas.getContext('2d');
         ctx.drawImage(img, 0, 0);
 
         var MAX_WIDTH = 1920;
@@ -71,10 +71,9 @@ angular.module('pboardApp')
         }
         canvas.width = width;
         canvas.height = height;
-        var ctx = canvas.getContext("2d");
         ctx.drawImage(img, 0, 0, width, height);
 
-        var dataurl = canvas.toDataURL("image/jpeg", 0.8);
+        var dataurl = canvas.toDataURL('image/jpeg', 0.8);
 
         var resizedFile = dataURItoBlob(dataurl);
         resizedFile.name = file.name;

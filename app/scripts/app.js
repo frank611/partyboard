@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('pboardApp', [
-  "ngCookies","ngResource","ngSanitize","ngRoute", 'angularFileUpload', 'btford.socket-io'
+  'ngCookies','ngResource','ngSanitize','ngRoute', 'angularFileUpload', 'btford.socket-io'
 ])
 .config(function ($routeProvider, $locationProvider, $httpProvider, $logProvider) {
   $routeProvider
@@ -22,6 +22,11 @@ angular.module('pboardApp', [
     .when('/boards/:id/post', {
       templateUrl: 'partials/post',
       controller: 'PostCtrl',
+      authenticate: true
+    })
+    .when('/boards/:id/settings', {
+      templateUrl: 'partials/settings',
+      controller: 'SettingsCtrl',
       authenticate: true
     })
     .otherwise({
@@ -56,7 +61,7 @@ angular.module('pboardApp', [
   $rootScope.$on('$routeChangeStart', function (event, next) {
     // Redirect to login if route requires auth and you're not logged in
     if (next.authenticate && !Auth.isLoggedIn()) {
-      console.log("auth deny");
+      console.log('auth deny');
       $location.path('/');
     }
   });
