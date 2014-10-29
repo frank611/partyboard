@@ -37,7 +37,7 @@
 			  <div class="panel-heading">My Boards</div>
 			  <!-- List group -->
 			  <div class="list-group">
-				  <div ng-click="goToBoard(board)" class="list-group-item" data-ng-repeat="board in boards" style="cursor: pointer">
+				  <div class="list-group-item" data-ng-repeat="board in boards" style="cursor: pointer">
 				    <h4 class="list-group-item-heading">
 				    	{{ board.name }}
 							<small>
@@ -51,7 +51,7 @@
   							</ng-pluralize>
 							</small>
 			    	</h4>
-				    <p class="list-group-item-text"><a ng-href="/boards/{{ board._id }}">Slideshow</a> | <a ng-href="/boards/{{ board._id }}/post">Add photos</a></p>
+				    <p class="list-group-item-text"><a ng-href="/boards/{{ board._id }}">Slideshow</a> | <a ng-href="/boards/{{ board._id }}/post">Add photos</a> | <a ng-click="downloadBoard(board._id)">Download</a></p>
 				  </div>
 				</div>
 			</div>
